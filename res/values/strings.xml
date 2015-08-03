@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">learn1</string>
+    <string name = "system_item_1">联系人选择</string>
+    <string name = "system_item_2">通知话语</string>
+</resources>
