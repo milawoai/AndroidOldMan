@@ -25,4 +25,5 @@ public class TestDoubleActivity  extends Activity {
 
         });
     }
+    //<!---< android:theme="@style/CustomTheme"> -->
 }

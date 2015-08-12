@@ -6,4 +6,7 @@
     <item android:id="@+id/findWordTochose"
             android:title="@string/system_item_2">
     </item>
+    <item android:id = "@+id/testActivity"
+          android:title="@string/system_item_test">
+    </item>
 </menu>

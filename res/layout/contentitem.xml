@@ -3,18 +3,32 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <LinearLayout
-            android:orientation= "vertical"
+    <RelativeLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="warp_content">
-        <TextView android:id = "@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:textSize="20dp" android:textColor="#f0f" android:paddingLeft="10dp"
-        />
-        <TextView android:id = "@+id/tel"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+        <LinearLayout
+                android:orientation= "vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+            <TextView android:id = "@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:textSize="20sp" android:textColor="#f0f" android:paddingLeft="10dp"
+            />
+            <TextView android:id = "@+id/tel"
                   android:layout_width="wrap_content"
-                  android:layout_height="wrap_content" android:textSize="14dp" android:textColor="#000" android:paddingLeft="10dp"
-                />
-    </LinearLayout>
+                  android:layout_height="wrap_content" android:textSize="14sp" android:textColor="#000" android:paddingLeft="10dp"
+                    />
+        </LinearLayout>
+        <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/contactcheckBox" android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+
 
 </LinearLayout>
