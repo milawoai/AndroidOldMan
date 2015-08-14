@@ -35,10 +35,19 @@
             </intent-filter>
         </activity>
 
+        <service android:name=".MessageSendService" />
+
+        <!--<receiver android:name = ".MainActivtyWithRedAlert$SetActivityRedAlertButtonStatus">
+            <intent-filter>
+                <action android:name="com.oldmanhelper.MainActivtyWithRedAlert.SetAction" />
+            </intent-filter>
+        </receiver>-->
+
     </application>
 
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.WRITE_CONTACTS" />}
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.SEND_SMS"/>}
 
 </manifest>

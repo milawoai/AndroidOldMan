@@ -7,10 +7,16 @@ import java.util.*;
  */
 public class GlobalInfo {
     public static Map<String,List<String>> globalContact = new HashMap<String,List<String>>();
+    public static boolean isChanged = false;
 
     public static void ContactAdd(ContactInfo e)
     {
-        globalContact.put(e.contactName,e.contactPhone);
+        globalContact.put(e.contactName, e.contactPhone);
+    }
+
+    public static void setGlobalContact(Map<String,List<String>> info)
+    {
+        globalContact.putAll(info);
     }
 
     public static void ContactRemove(ContactInfo e)
@@ -37,8 +43,17 @@ public class GlobalInfo {
                 String value;
                 key=it.next().toString();
                 value=globalContact.get(key).toString();
-                System.out.println(key+"--"+value);
+                System.out.println(key+"......"+value);
             }
         }
+        else
+        {
+            System.out.println("It is Empty");
+        }
+    }
+
+    public static boolean isEmpty()
+    {
+      return  globalContact.size()<=0;
     }
 }

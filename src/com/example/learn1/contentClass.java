@@ -15,7 +15,6 @@ import android.provider.ContactsContract;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-
 import java.util.*;
 
 import com.example.learn1.PublicData.ContactInfo;
@@ -74,7 +73,6 @@ public class contentClass extends Activity {
         public View getView(final int position,View convertView,ViewGroup parent)
         {
             final ContactItem item = datalist.get(position);
-            System.out.println(position);
             final ViewHolder holder;
             if(convertView == null)
             {
@@ -153,6 +151,7 @@ public class contentClass extends Activity {
                 GlobalInfo.ContactAdd(e);
             }
         }
+        GlobalInfo.isChanged = true;
     }
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -183,7 +182,7 @@ public class contentClass extends Activity {
             }
         });
 
-        chooseContact.setOnClickListener(new View.OnClickListener() {
+        cancelContactPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
@@ -234,7 +233,7 @@ public class contentClass extends Activity {
                         if(phones.moveToFirst())
                         {
                             do {
-                                String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                                String phoneNumber = (phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))).replaceAll(" ","");
                                 if(phoneNumber!=null)
                                 {
                                     if(phoneNumCount>0)
@@ -255,7 +254,14 @@ public class contentClass extends Activity {
                         continue;
                     }
                     contact.ContactName = disPlayName;
-                    contact.isChoosed = false;
+                    if(GlobalInfo.globalContact.containsKey(contact.ContactName))
+                    {
+                        contact.isChoosed = true;
+                    }
+                    else {
+                        contact.isChoosed = false;
+                    }
+                    
                    // contact.put("contentName", disPlayName);
                     contactList.add(contact);
                 }while(cursor.moveToNext());
