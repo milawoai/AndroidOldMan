@@ -3,7 +3,7 @@
     <color name = "background_theme_color">#FFFFFF</color>
     <style name = "CustomTheme" parent="android:Theme.Light">
         <item name ="android:windowNoTitle">true</item>
-        <item name= "android:windowFullscreen">true</item>
+        <item name= "android:windowFullscreen">false</item>
         <item name = "android:windowBackground">@color/background_theme_color</item>
     </style>
 </resources>

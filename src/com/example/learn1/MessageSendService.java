@@ -50,7 +50,6 @@ public class MessageSendService extends IntentService {
     @Override
     public void onDestroy()
     {
-        System.out.println("Message Service Destory");
         super.onDestroy();
         Intent sendIntent = new Intent();
         sendIntent.setAction(MainActivtyWithRedAlert.StatusRecvier);

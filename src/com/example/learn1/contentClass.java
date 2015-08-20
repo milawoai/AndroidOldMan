@@ -179,6 +179,7 @@ public class contentClass extends Activity {
             public void onClick(View view) {
                 setContactToGlobalContent();
                 finish();
+                //finishActivity(Variables.MainActivityWithRedAlert_REQUESTCODE);
             }
         });
 
@@ -261,7 +262,7 @@ public class contentClass extends Activity {
                     else {
                         contact.isChoosed = false;
                     }
-                    
+
                    // contact.put("contentName", disPlayName);
                     contactList.add(contact);
                 }while(cursor.moveToNext());
@@ -288,4 +289,20 @@ public class contentClass extends Activity {
         }
     }
 
+
+    @Override
+    public void onDestroy()
+    {
+        System.out.println("Activty onDestroy");
+       // unregisterReceiver(activityReceiver);
+       /* unregisterReceiver(activityReceiver);
+
+        if(!GlobalInfo.isEmpty()&&GlobalInfo.isChanged)
+        {
+            System.out.println(Method.saveInfoToString(GlobalInfo.globalContact));
+            editor.putString("info", Method.saveInfoToString(GlobalInfo.globalContact));
+            editor.commit();
+        }*/
+        super.onDestroy();
+    }
 }

@@ -43,12 +43,12 @@ public class GlobalInfo {
                 String value;
                 key=it.next().toString();
                 value=globalContact.get(key).toString();
-                System.out.println(key+"......"+value);
+              //  System.out.println(key+"......"+value);
             }
         }
         else
         {
-            System.out.println("It is Empty");
+           // System.out.println("It is Empty");
         }
     }
 

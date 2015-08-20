@@ -5,4 +5,7 @@ package com.example.learn1.PublicData;
  */
 public class Variables {
    public final static int UPDATE_LIST = 1;
+
+   public final static int MainATOContact_REQUESTCODE = 0x11;
+   public final static int contenClass_REQUESTCODE = 0x12;
 }

@@ -67,7 +67,7 @@ public class Method {
         try
         {
             JSONObject mapInfo = new JSONObject(info);
-            System.out.println(mapInfo.toString());
+           // System.out.println(mapInfo.toString());
             JSONArray arrayName = mapInfo.names();
             for(int i = 0;i<arrayName.length();i++)
             {
@@ -77,7 +77,7 @@ public class Method {
                 for(int j = 0;j<arrayPhone.length();j++)
                 {
                     phone.add(arrayPhone.getString(j));
-                    System.out.println(arrayPhone.getString(j));
+                    //System.out.println(arrayPhone.getString(j));
                 }
                 datas.put(Name,phone);
             }

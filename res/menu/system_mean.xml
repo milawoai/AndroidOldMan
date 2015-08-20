@@ -3,8 +3,11 @@
     <item android:id="@+id/chooseContant"
           android:title="@string/system_item_1">
     </item>
-    <item android:id="@+id/findWordTochose"
+    <item android:id="@+id/chooseWord"
             android:title="@string/system_item_2">
+    </item>
+    <item android:id="@+id/powerManager"
+          android:title="@string/system_item_3">
     </item>
     <item android:id = "@+id/testActivity"
           android:title="@string/system_item_test">
