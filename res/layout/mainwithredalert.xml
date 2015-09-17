@@ -3,12 +3,16 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent" android:weightSum="1"
-              android:id = "@+id/root">
+              android:id = "@+id/root" android:gravity="fill_vertical">
 
     <ImageButton
             android:background="@color/background_theme_color"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType= "fitCenter"
-            android:id="@+id/imageButtonTheRedAlert" android:layout_gravity="center_horizontal"/>
+            android:layout_height="200dp"
+            android:id="@+id/imageButtonTheRedAlert"/>
+    <Button
+            android:background="@color/background_theme_color"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/buttonSendQQ" android:text="sendQQTest" android:gravity="fill_vertical"/>
 </LinearLayout>

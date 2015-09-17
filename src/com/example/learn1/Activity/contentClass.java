@@ -1,4 +1,4 @@
-package com.example.learn1;
+package com.example.learn1.Activity;
 
 import android.app.Activity;
 import android.database.Cursor;
@@ -20,6 +20,7 @@ import java.util.*;
 import com.example.learn1.PublicData.ContactInfo;
 import com.example.learn1.PublicData.GlobalInfo;
 import com.example.learn1.PublicData.Variables;
+import com.example.learn1.R;
 
 /**
  * Created by a0153-00401 on 15/8/1.

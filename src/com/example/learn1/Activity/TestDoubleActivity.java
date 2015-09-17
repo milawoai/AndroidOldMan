@@ -1,10 +1,10 @@
-package com.example.learn1;
+package com.example.learn1.Activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
+import com.example.learn1.R;
 
 /**
  * Created by a0153-00401 on 15/7/28.

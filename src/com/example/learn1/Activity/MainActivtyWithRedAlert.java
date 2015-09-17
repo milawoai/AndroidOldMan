@@ -1,18 +1,13 @@
-package com.example.learn1;
+package com.example.learn1.Activity;
 
 
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.PendingIntent;
 import android.content.*;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.telephony.SmsManager;
-import android.util.Log;
 import android.view.*;
+import android.widget.Button;
 import android.widget.ImageButton;
-import android.os.PowerManager;
 
 
 import android.widget.Toast;
@@ -20,9 +15,11 @@ import com.example.learn1.CustomComponent.BackKeyCompont;
 import com.example.learn1.PublicData.GlobalInfo;
 import com.example.learn1.PublicData.Method;
 import com.example.learn1.PublicData.Variables;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.learn1.R;
+import com.example.learn1.ThirdpartyInsist.TecentGetingListener;
+import com.tencent.connect.common.Constants;
+import com.tencent.connect.share.QQShare;
+import com.tencent.tauth.Tencent;
 
 import java.util.*;
 
@@ -35,13 +32,14 @@ public class MainActivtyWithRedAlert extends Activity {
 
 
     private static final String TAG = "MainActivtyWithRedAlert";
+    public static final  String QQ_ID = "1104762927";
     final static String CRAZYIT_ACTION =
             "org.crazyit.intent.action.CRAZYIT_ACTION";
     // 定义一个Category常量
     final static String CRAZYIT_CATEGORY =
             "org.crazyit.intent.category.CRAZYIT_CATEGORY";
 
-    final static String StatusRecvier =
+    final static public String StatusRecvier =
             "com.oldmanhelper.MainActivtyWithRedAlert.SetAction";
 
     Stack stClickRecord = new Stack();
@@ -50,6 +48,8 @@ public class MainActivtyWithRedAlert extends Activity {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
     BroadcastReceiver activityReceiver;
+
+    Tencent mTencent;
 
 
     public class SetActivityRedAlertButtonStatus extends BroadcastReceiver
@@ -73,11 +73,10 @@ public class MainActivtyWithRedAlert extends Activity {
     {
         super.onCreate(savedInstanceState);
 
-        System.out.println("Application Start");
-        System.out.println("Task ID:" + this.getTaskId());
-        System.out.println("Class Name:" + this.toString());
         Toast.makeText(MainActivtyWithRedAlert.this, this.toString(), Toast.LENGTH_SHORT).show();
-        System.out.println("Activty onCreate");
+
+
+        mTencent = Tencent.createInstance(QQ_ID, this.getApplicationContext());
         activityReceiver = new SetActivityRedAlertButtonStatus();
         preferences = getSharedPreferences("Record", MODE_PRIVATE);
         editor = preferences.edit();
@@ -101,40 +100,49 @@ public class MainActivtyWithRedAlert extends Activity {
         mainButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                Toast toast = Toast.makeText(MainActivtyWithRedAlert.this,"开始发送",Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(MainActivtyWithRedAlert.this, "开始发送", Toast.LENGTH_SHORT);
                 toast.show();
-                Intent intent = new Intent(MainActivtyWithRedAlert.this,MessageSendService.class);
+              /*  Intent intent = new Intent(MainActivtyWithRedAlert.this, MessageSendService.class);
                 startService(intent);
-                redbutton.setActivated(false);
+                redbutton.setActivated(false);*/
                 return false;
             }
         });
         mainButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // MainActivtyWithRedAlert.this.finish();
-               // System.out.println("startService  " + stClickRecord.size());
+                // MainActivtyWithRedAlert.this.finish();
+                // System.out.println("startService  " + stClickRecord.size());
 
-                if(stClickRecord.size()>0) {
+                if (stClickRecord.size() > 0) {
                     long timeLastClick = (long) stClickRecord.peek();
-                  //  System.out.println(System.currentTimeMillis() - timeLastClick);
-                    if(System.currentTimeMillis() - timeLastClick > 1000)
-                    {
+                    //  System.out.println(System.currentTimeMillis() - timeLastClick);
+                    if (System.currentTimeMillis() - timeLastClick > 1000) {
                         stClickRecord.clear();
                     }
                 }
 
                 stClickRecord.push(System.currentTimeMillis());
 
-                if(stClickRecord.size()>5)
-                {
+                if (stClickRecord.size() > 5) {
                     stClickRecord.clear();
-                    Intent intent = new Intent(MainActivtyWithRedAlert.this,MessageSendService.class);
+                    Intent intent = new Intent(MainActivtyWithRedAlert.this, MessageSendService.class);
                     startService(intent);
-                    Toast toast = Toast.makeText(MainActivtyWithRedAlert.this,"开始发送",Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(MainActivtyWithRedAlert.this, "开始发送", Toast.LENGTH_SHORT);
                     toast.show();
                     redbutton.setActivated(false);
                 }
+            }
+        });
+
+        Button qqBtn = (Button)findViewById(R.id.buttonSendQQ);
+        qqBtn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Toast toast = Toast.makeText(MainActivtyWithRedAlert.this, "开始发送", Toast.LENGTH_SHORT);
+                toast.show();
+                shareWithQQ(view);
+                return false;
             }
         });
     }
@@ -169,7 +177,9 @@ public class MainActivtyWithRedAlert extends Activity {
         switch(mi.getItemId()) {
             case R.id.chooseContant:
                 System.out.println("start new Activity");
-                startActivityForResult(new Intent(this, contentClass.class), Variables.MainATOContact_REQUESTCODE);
+                Intent intent_contentClass = new Intent(this, contentClass.class);
+                intent_contentClass.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivityForResult(intent_contentClass,Variables.MainATOContact_REQUESTCODE);
                 break;
             case R.id.powerManager:
               /*  PowerManager powerManager= (PowerManager) getSystemService(Context.POWER_SERVICE);
@@ -177,6 +187,7 @@ public class MainActivtyWithRedAlert extends Activity {
 
                 Intent intent_other = new Intent();
                 intent_other.setAction("org.crazyit.intent.action.CRAZYIT_ACTION");
+                intent_other.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent_other);
                 break;
             case R.id.testActivity:
@@ -266,6 +277,22 @@ public class MainActivtyWithRedAlert extends Activity {
             editor.putString("info", Method.saveInfoToString(GlobalInfo.globalContact));
             editor.commit();
         }
+
+
+    }
+
+
+    public void shareWithQQ(View view)
+    {
+        final Bundle params = new Bundle();
+        params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
+        params.putString(QQShare.SHARE_TO_QQ_TITLE, "过来帮忙啊");
+        params.putString(QQShare.SHARE_TO_QQ_SUMMARY,  "测试用摘要");
+        params.putString(QQShare.SHARE_TO_QQ_TARGET_URL,  "http://www.qq.com/news/1.html");
+        params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL,"http://imgcache.qq.com/qzone/space_item/pre/0/66768.gif");
+        params.putString(QQShare.SHARE_TO_QQ_APP_NAME, "oldmanhelp1104762927");
+       // params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, "其他附加功能");
+        mTencent.shareToQQ(MainActivtyWithRedAlert.this, params, new TecentGetingListener());
     }
 
     @Override

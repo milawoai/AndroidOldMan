@@ -1,9 +1,10 @@
-package com.example.learn1;
+package com.example.learn1.Activity;
 
 import android.app.IntentService;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.telephony.SmsManager;
+import com.example.learn1.Activity.MainActivtyWithRedAlert;
 import com.example.learn1.PublicData.GlobalInfo;
 
 import java.util.Iterator;
@@ -25,7 +26,7 @@ public class MessageSendService extends IntentService {
     {
         System.out.println("onHandleIntent");
         smsManager = SmsManager.getDefault();
-        final String testMsg = "，这是测试短信";
+        final String testMsg = "，这是周士杰的手机号码 18518626770";
 
         if(GlobalInfo.globalContact.size()<=0)
         {
@@ -40,8 +41,9 @@ public class MessageSendService extends IntentService {
             if(value!=null&&value.size()>0)
             {
                 for(String number:value) {
-                  /*  PendingIntent pi = PendingIntent.getActivity(this, 0, new Intent(), 0);
-                    smsManager.sendTextMessage(number,null,key+testMsg,pi,null);*/
+                    System.out.println("isOut");
+                   PendingIntent pi = PendingIntent.getActivity(this, 0, new Intent(), 0);
+                    smsManager.sendTextMessage(number,null,key+testMsg,pi,null);
                 }
             }
         }
